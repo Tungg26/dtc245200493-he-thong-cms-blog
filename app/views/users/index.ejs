@@ -1,0 +1,8 @@
+<%- include('../partials/header', {title:'Tác giả'}) %>
+<div class="bar"><h1>Tác giả &amp; Phân quyền</h1><a class="btn" href="/users/new">+ Thêm tác giả</a></div>
+<table><tr><th>Họ tên</th><th>Username</th><th>Email</th><th>Vai trò</th><th>Số bài</th><th></th></tr>
+<% users.forEach(function(u){ %><tr><td><b><%= u.full_name %></b></td><td><%= u.username %></td><td><%= u.email %></td>
+<td><span class="badge"><%= u.role %></span></td><td><%= u.post_count %></td>
+<td class="act"><a class="btn ghost sm" href="/users/<%= u.id %>/edit">Sửa</a>
+<form method="post" action="/users/<%= u.id %>/delete" data-confirm><button class="btn danger sm">Xóa</button></form></td></tr><% }) %></table>
+<%- include('../partials/footer') %>

@@ -1,0 +1,8 @@
+<%- include('../partials/header', {title:'Danh mục'}) %>
+<div class="bar"><h1>Danh mục</h1><a class="btn" href="/categories/new">+ Thêm danh mục</a></div>
+<table><tr><th>Tên</th><th>Slug</th><th>Mô tả</th><th>Số bài</th><th></th></tr>
+<% categories.forEach(function(c){ %><tr><td><b><%= c.name %></b></td><td class="meta"><%= c.slug %></td>
+<td><%= c.description || '' %></td><td><span class="badge"><%= c.post_count %></span></td>
+<td class="act"><a class="btn ghost sm" href="/categories/<%= c.id %>/edit">Sửa</a>
+<form method="post" action="/categories/<%= c.id %>/delete" data-confirm><button class="btn danger sm">Xóa</button></form></td></tr><% }) %></table>
+<%- include('../partials/footer') %>

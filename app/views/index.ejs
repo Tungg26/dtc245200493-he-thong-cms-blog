@@ -1,0 +1,14 @@
+<%- include('partials/header', {title:'Trang chủ'}) %>
+<h1>Tin tức mới nhất</h1><p class="sub">Blog học thuật và kỹ thuật CNTT</p>
+<div class="stats">
+<div class="card stat"><b><%= stats.posts %></b>Bài viết</div>
+<div class="card stat"><b><%= stats.categories %></b>Danh mục</div>
+<div class="card stat"><b><%= stats.users %></b>Tác giả</div></div>
+<div class="grid"><% posts.forEach(function(p){ %>
+<div class="card"><span class="badge"><%= p.category_name || 'Chưa phân loại' %></span>
+<h3><a href="/posts/<%= p.id %>"><%= p.title %></a></h3>
+<p><%= p.content.substring(0,110) %>…</p>
+<div class="meta"><%= p.author_name || 'Ẩn danh' %> · <%= new Date(p.created_at).toLocaleDateString('vi-VN') %></div></div>
+<% }) %></div>
+<% if(!posts.length){ %><p class="meta">Chưa có bài viết nào.</p><% } %>
+<%- include('partials/footer') %>

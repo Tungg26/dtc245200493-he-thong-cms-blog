@@ -1,0 +1,12 @@
+<h1><%= post.id ? 'Chỉnh sửa bài viết' : 'Thêm bài viết' %></h1>
+<form class="f card" method="post" action="<%= post.id ? '/posts/'+post.id+'/update' : '/posts' %>">
+<label>Tiêu đề</label><input name="title" required maxlength="255" value="<%= post.title || '' %>">
+<label>Nội dung</label><textarea name="content" rows="10" required><%= post.content || '' %></textarea>
+<label>Danh mục</label><select name="category_id"><option value="">— Không —</option>
+<% categories.forEach(function(c){ %><option value="<%= c.id %>" <%= post.category_id==c.id?'selected':'' %>><%= c.name %></option><% }) %></select>
+<label>Tác giả</label><select name="author_id"><option value="">— Không —</option>
+<% users.forEach(function(u){ %><option value="<%= u.id %>" <%= post.author_id==u.id?'selected':'' %>><%= u.full_name %></option><% }) %></select>
+<label>Trạng thái</label><select name="status">
+<option value="published" <%= post.status!=='draft'?'selected':'' %>>Published</option>
+<option value="draft" <%= post.status==='draft'?'selected':'' %>>Draft</option></select><br>
+<button class="btn">Lưu</button> <a class="btn ghost" href="/posts">Hủy</a></form>

@@ -1,0 +1,9 @@
+<%- include('../partials/header', {title:post.title}) %>
+<a href="/posts">← Quay lại</a>
+<div class="card" style="margin-top:14px"><span class="badge <%= post.status %>"><%= post.status %></span>
+<span class="badge"><%= post.category_name || 'Chưa phân loại' %></span>
+<h1><%= post.title %></h1><div class="meta"><%= post.author_name || 'Ẩn danh' %> · <%= new Date(post.created_at).toLocaleString('vi-VN') %></div>
+<hr style="border-color:var(--line)"><div class="article"><%= post.content %></div>
+<br><a class="btn ghost sm" href="/posts/<%= post.id %>/edit">Sửa</a>
+<form style="display:inline" method="post" action="/posts/<%= post.id %>/delete" data-confirm><button class="btn danger sm">Xóa</button></form></div>
+<%- include('../partials/footer') %>

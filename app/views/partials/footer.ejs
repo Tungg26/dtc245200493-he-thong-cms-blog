@@ -1,0 +1,10 @@
+</main>
+<footer>Blog / CMS — Đề 7 — Trương Văn Tùng — <%= studentId %></footer>
+<dialog id="confirmBox"><b>Xác nhận xóa?</b><p class="meta">Hành động này không thể hoàn tác.</p>
+<div class="row"><button class="btn ghost" id="no">Hủy</button><button class="btn danger" id="yes">Xóa</button></div></dialog>
+<script>
+(function(){var d=document.getElementById('confirmBox'),t=null;
+document.querySelectorAll('form[data-confirm]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();t=f;d.showModal();});});
+document.getElementById('no').onclick=function(){d.close();};
+document.getElementById('yes').onclick=function(){d.close();t.removeAttribute('data-confirm');t.submit();};})();
+</script></body></html>

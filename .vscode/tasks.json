@@ -1,0 +1,9 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "1. Tạo SSL", "type": "shell", "command": "bash generate-ssl.sh", "windows": { "command": "powershell -ExecutionPolicy Bypass -File generate-ssl.ps1" } },
+    { "label": "2. Docker Up (build)", "type": "shell", "command": "docker compose up -d --build", "problemMatcher": [] },
+    { "label": "3. Docker Status", "type": "shell", "command": "docker compose ps", "problemMatcher": [] },
+    { "label": "4. Docker Down", "type": "shell", "command": "docker compose down", "problemMatcher": [] }
+  ]
+}

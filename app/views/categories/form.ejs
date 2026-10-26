@@ -1,0 +1,5 @@
+<h1><%= item.id ? 'Chỉnh sửa danh mục' : 'Thêm danh mục' %></h1>
+<form class="f card" method="post" action="<%= item.id ? '/categories/'+item.id+'/update' : '/categories' %>">
+<label>Tên danh mục (slug tự sinh)</label><input name="name" required maxlength="100" value="<%= item.name || '' %>">
+<label>Mô tả</label><textarea name="description" rows="3"><%= item.description || '' %></textarea><br>
+<button class="btn">Lưu</button> <a class="btn ghost" href="/categories">Hủy</a></form>

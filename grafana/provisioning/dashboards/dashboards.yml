@@ -1,0 +1,6 @@
+apiVersion: 1
+providers:
+  - name: blog-cms
+    folder: Blog CMS
+    type: file
+    options: { path: /var/lib/grafana/dashboards }

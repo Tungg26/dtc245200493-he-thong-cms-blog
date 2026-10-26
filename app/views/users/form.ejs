@@ -1,0 +1,8 @@
+<h1><%= item.id ? 'Chỉnh sửa tác giả' : 'Thêm tác giả' %></h1>
+<form class="f card" method="post" action="<%= item.id ? '/users/'+item.id+'/update' : '/users' %>">
+<label>Họ tên</label><input name="full_name" required value="<%= item.full_name || '' %>">
+<label>Username</label><input name="username" required maxlength="50" value="<%= item.username || '' %>">
+<label>Email</label><input type="email" name="email" required value="<%= item.email || '' %>">
+<label>Vai trò</label><select name="role">
+<% ['admin','editor','author'].forEach(function(r){ %><option <%= (item.role||'author')===r?'selected':'' %>><%= r %></option><% }) %></select><br>
+<button class="btn">Lưu</button> <a class="btn ghost" href="/users">Hủy</a></form>

@@ -1,0 +1,25 @@
+<%- include('../partials/header', {title:'Bài viết'}) %>
+<div class="bar"><div><h1>Bài viết</h1><p class="sub" style="margin:0"><%= posts.length %> bài</p></div>
+<a class="btn" href="/posts/new">+ Thêm bài viết</a></div>
+<form class="filters bar" method="get">
+<input name="keyword" placeholder="Tìm từ khóa…" value="<%= keyword %>">
+<select name="category"><option value="">Tất cả danh mục</option>
+<% categories.forEach(function(c){ %><option value="<%= c.id %>" <%= String(c.id)===String(category)?'selected':'' %>><%= c.name %></option><% }) %></select>
+<select name="view"><option value="grid" <%= view==='grid'?'selected':'' %>>Dạng lưới</option><option value="table" <%= view==='table'?'selected':'' %>>Dạng bảng</option></select>
+<button class="btn ghost">Lọc</button></form>
+<% if(view==='table'){ %>
+<table><tr><th>Tiêu đề</th><th>Danh mục</th><th>Tác giả</th><th>Trạng thái</th><th></th></tr>
+<% posts.forEach(function(p){ %><tr><td><a href="/posts/<%= p.id %>"><%= p.title %></a></td>
+<td><%= p.category_name || '—' %></td><td><%= p.author_name || '—' %></td>
+<td><span class="badge <%= p.status %>"><%= p.status %></span></td>
+<td class="act"><a class="btn ghost sm" href="/posts/<%= p.id %>/edit">Sửa</a>
+<form method="post" action="/posts/<%= p.id %>/delete" data-confirm><button class="btn danger sm">Xóa</button></form></td></tr><% }) %></table>
+<% } else { %><div class="grid"><% posts.forEach(function(p){ %>
+<div class="card"><span class="badge <%= p.status %>"><%= p.status %></span> <span class="badge"><%= p.category_name || '—' %></span>
+<h3><a href="/posts/<%= p.id %>"><%= p.title %></a></h3><p><%= p.content.substring(0,100) %>…</p>
+<div class="meta"><%= p.author_name || 'Ẩn danh' %></div><br>
+<a class="btn ghost sm" href="/posts/<%= p.id %>/edit">Sửa</a>
+<form style="display:inline" method="post" action="/posts/<%= p.id %>/delete" data-confirm><button class="btn danger sm">Xóa</button></form></div>
+<% }) %></div><% } %>
+<% if(!posts.length){ %><p class="meta">Không có bài viết phù hợp.</p><% } %>
+<%- include('../partials/footer') %>

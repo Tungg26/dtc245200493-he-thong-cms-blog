@@ -1,0 +1,7 @@
+.env
+node_modules/
+nginx/ssl/
+mysql/.my.cnf
+*_data/
+*.log
+.DS_Store

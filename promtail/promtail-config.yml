@@ -1,0 +1,37 @@
+server:
+  http_listen_port: 9080
+positions:
+  filename: /tmp/positions.yaml
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # Job 1: log stdout/stderr cua tat ca container
+  - job_name: docker
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 10s
+    relabel_configs:
+      - source_labels: ['__meta_docker_container_name']
+        regex: '/(.*)'
+        target_label: container_name
+      - target_label: job
+        replacement: docker
+    pipeline_stages:
+      - docker: {}
+
+  # Job 2: Nginx access log
+  - job_name: nginx-access
+    static_configs:
+      - targets: [localhost]
+        labels: { job: nginx-access, __path__: /var/log/nginx/access.log }
+    pipeline_stages:
+      - regex:
+          expression: '^(?P<remote_addr>\S+) - \S+ \[(?P<time_local>[^\]]+)\] "(?P<request>[^"]*)" (?P<status>\d{3}) (?P<body_bytes_sent>\d+)'
+      - labels: { status: }
+
+  # Job 3: Nginx error log
+  - job_name: nginx-error
+    static_configs:
+      - targets: [localhost]
+        labels: { job: nginx-error, __path__: /var/log/nginx/error.log }
