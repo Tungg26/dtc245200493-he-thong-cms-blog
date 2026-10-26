@@ -21,6 +21,8 @@ Node.js (Express + EJS) · MySQL 8 · Nginx HTTPS · Prometheus · Grafana · Lo
 
 Nginx dùng cổng `8080` (HTTP) và `8443` (HTTPS) trên máy host để tránh xung đột với dịch vụ khác; bên trong Docker vẫn dùng cổng `80` và `443`.
 
+Prometheus theo dõi metrics của ứng dụng, Nginx, MySQL, cAdvisor, Loki và Promtail. Loki bật compactor để thực thi thời gian lưu log 7 ngày.
+
 ## Chạy web không cần Docker (để sửa code nhanh)
 Cần MySQL cục bộ đã chạy `mysql/init.sql`.
 ```bash
